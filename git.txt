@@ -1,0 +1,211 @@
+sudo apt update && sudo apt upgrade -y
+sudo apt install git
+mkdir repo
+git init
+git config --global user.email rafail.shir@yandex.ru
+git config --global user.name Yastreb47
+git config --global color.ut auto
+#git config --global core.editor "[program]"
+cd repo
+git remote add origin https://github.com/Yastreb47/repo-github.git
+git remote -v
+
+Урок 5 Управление файлами репозитория
+cd repo
+touch readme.md
+git status
+git add readme.md
+git status
+git commit
+git status
+echo "edited" > readme.md
+git status
+git commit -am 'updated  readme.md'      #(git add файл +git commit +cообщение'')
+mkdir images
+git status
+touch images/.gitkeep
+git status
+git add images
+git commit -m 'created images directory'
+touch .gitignore
+git status
+git add .gitignore
+git status
+echo "config" > .gitignore
+cat .gitignore
+git status
+git commit -am 'ignore set up'
+git status
+touch config
+ 
+Урок 6 История изменений
+
+git status
+git log      # просмотр истории коммитов
+git log --oneline
+git reset e5e125c    # удаление коммита из истории
+git reflog               # просмотр истории действий
+git reset e5e125c   # восстановление коммита в истории
+git log --oneline
+git revert 36d269b             # отменяет действие, совершенное коммитом
+#git restore имя_файла    #сброс состояния файла на указанное
+
+Урок 7 Работа с ветками репозитория
+
+git status
+git branch
+git branch dev
+git checkout dev
+touch dev-branch.md
+git add dev-branch.md
+git commit -m 'added dev-branch'
+git log
+git checkout main
+git log --oneline
+touch main-branch.md
+git add main-branch.md
+git commit -m 'main update'
+git checkout dev
+git log
+git branch dev-main main
+git branch
+git checkout dev-main
+git log --oneline
+git checkout -b dev-test
+git branch
+git checkout main
+
+Урок 8 Публикация репозитория.
+
+cоздаем в гитхаб репозиторий project
+ssh-keygen
+cat /home/ub/.ssh/id_rsa.pub
+git clone git@github.com:Yastreb47/project.git
+git remote -v
+git checkout -b dev
+touch dev.md
+echo "# hey" > dev.md
+git add dev.md
+git commit -m 'first dev commit'
+git log
+git push
+#git push --set-upstream origin dev
+git push -u origin dev
+git pull
+git log
+cat dev.md
+
+Урок 9 слияние веток
+
+git branch 
+git fetch
+git branch
+git checkout dev-kraken
+git branch
+git checkout main
+git merge dev
+git log
+git merge dev-kraken
+git push
+git branch -d dev dev-kraken
+git push
+git push --delete origin dev dev-kraken
+git checkout -b feature
+mkdir code
+cd code
+touch app.go
+touch config.go
+cd ..
+git status
+git add .
+git status
+git commit -m 'new code feature'
+git checkout main
+git --oneline
+git checkout -b first-feature
+mkdir source
+touch source/main.go
+git add .
+git commit -m 'first feature code'
+git log --oneline
+git checkout main
+git merge feature
+git log --oneline
+git pull
+git checkout first-feature
+git rebase main
+ls
+git log --oneline
+git push
+git push --force
+
+Урок 10 управление версиями.
+
+git status 
+git log --oneline
+git tag 1.0.0
+git tag
+git tag --list
+git push
+git push --tags
+touch new-feature.go
+git add .
+git commit -m 'new feature version'
+git log --oneline
+git push
+git tag 1.0.1
+git log --oneline 	
+echo 'content' > new-feature.go
+git commit -am 'update feature version'
+git log --oneline
+git tag -d 1.0.1
+git tag 1.0.1
+git log --oneline
+git push --tags
+git push --delete origin 1.0.1
+ 
+Урок 11  Создание pull-request
+ 
+git checkout -b dev
+echo 'some content' > new-feture.go
+git add .
+git commit -m 'new feature'
+git push -u origin dev
+
+Урок 12 Сложные операции
+
+git status
+echo 'new dev content' > dev.md
+git status
+git stash
+git stash list
+git checkout dev
+echo 'dev.md' > dev.md 
+git status
+git stash
+git checkout main
+git stash list
+git stash pop stash
+
+git checkout -b squash-dev
+touch squash.md
+git add .
+git commit -m 'commit 01'
+git log --oneline
+echo 'updated' > squash.md
+git commit -am 'commit 02'
+git log --oneline
+echo 'updated 02' > squash.md
+git commit -am 'commit 03'
+git log --oneline
+git checkout main
+git merge squash-dev --squash
+git reset --hard
+git status
+git checkout squash-dev
+git log --oneline
+git rebase -i HEAD~3
+git log --oneline
+cat squash.md
+git push --force
+
