@@ -11,6 +11,7 @@ git remote add origin https://github.com/Yastreb47/repo-github.git
 git remote -v
 
 Урок 5 Управление файлами репозитория
+
 cd repo
 touch readme.md
 git status
@@ -37,7 +38,8 @@ git status
 git commit -am 'ignore set up'
 git status
 touch config
- 
+git status
+
 Урок 6 История изменений
 
 git status
