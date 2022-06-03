@@ -192,7 +192,8 @@ git status
 git stash
 git checkout main
 git stash list
-git stash pop stash
+git branch
+git stash pop stash@{1}
 
 git checkout -b squash-dev
 touch squash.md
@@ -216,3 +217,56 @@ git log --oneline
 cat squash.md
 git push --force
 
+
+git checkout -b cherry
+git log --oneline
+git log --oneline --all
+git cherry-pick b133786  #первый коммит
+git log --oneline
+
+git checkout main
+touch fail.md
+git add .
+git commit -m 'test fail'
+git log --oneline
+echo 'updated' > fail.md
+git add .
+git commit --amend
+git log --oneline
+git push --force
+
+git checkout -b dev1
+ls
+echo 'dev1' > new-feature.go
+git add .
+git commit -m 'dev1'
+git log --oneline
+git checkout -b dev2 main
+echo 'dev2' > new-feature.go
+git add .
+git commit -m 'dev2'
+git log --oneline
+git checkout main
+git merge dev1 dev2
+git status
+vi new-feature.go
+git add .
+git commit 
+git status
+git log --oneline
+
+git reset --hard 68e42c5
+cat new-feature.go
+got log --oneline
+
+  Урок 13 . Работа с Fork-репозиториями
+   	
+   	Создание Fork
+   	Клонирование
+   	Разработка
+   	Публикация
+	Создание pull-request
+	
+   	
+  
+  
